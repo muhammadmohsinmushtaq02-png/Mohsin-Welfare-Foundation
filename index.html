@@ -962,3 +962,253 @@ document.querySelectorAll('.lang-toggle button').forEach(btn => {
   }
 }
 </style>
+
+<section id="gallery" class="gallery-section">
+
+  <div class="gallery-container">
+
+```
+<div class="gallery-heading">
+  <span class="gallery-badge">OUR GALLERY</span>
+  <h2>Moments & Memories</h2>
+  <p>
+    Explore our latest activities, events, programs and memorable moments.
+  </p>
+</div>
+
+<div class="gallery-grid">
+
+  <div class="gallery-item">
+    <img src="images/gallery-1.jpg" alt="Gallery Image 1" loading="lazy">
+    <div class="gallery-overlay">
+      <span>Events</span>
+      <h3>Our Activities</h3>
+    </div>
+  </div>
+
+  <div class="gallery-item">
+    <img src="images/gallery-2.jpg" alt="Gallery Image 2" loading="lazy">
+    <div class="gallery-overlay">
+      <span>Community</span>
+      <h3>Community Moments</h3>
+    </div>
+  </div>
+
+  <div class="gallery-item">
+    <img src="images/gallery-3.jpg" alt="Gallery Image 3" loading="lazy">
+    <div class="gallery-overlay">
+      <span>Education</span>
+      <h3>Educational Activities</h3>
+    </div>
+  </div>
+
+  <div class="gallery-item">
+    <img src="images/gallery-4.jpg" alt="Gallery Image 4" loading="lazy">
+    <div class="gallery-overlay">
+      <span>Programs</span>
+      <h3>Special Programs</h3>
+    </div>
+  </div>
+
+  <div class="gallery-item">
+    <img src="images/gallery-5.jpg" alt="Gallery Image 5" loading="lazy">
+    <div class="gallery-overlay">
+      <span>Events</span>
+      <h3>Memorable Events</h3>
+    </div>
+  </div>
+
+  <div class="gallery-item">
+    <img src="images/gallery-6.jpg" alt="Gallery Image 6" loading="lazy">
+    <div class="gallery-overlay">
+      <span>Moments</span>
+      <h3>Beautiful Memories</h3>
+    </div>
+  </div>
+
+  <div class="gallery-item">
+    <img src="images/gallery-7.jpg" alt="Gallery Image 7" loading="lazy">
+    <div class="gallery-overlay">
+      <span>Activities</span>
+      <h3>Learning Together</h3>
+    </div>
+  </div>
+
+  <div class="gallery-item">
+    <img src="images/gallery-8.jpg" alt="Gallery Image 8" loading="lazy">
+    <div class="gallery-overlay">
+      <span>Community</span>
+      <h3>Together We Grow</h3>
+    </div>
+  </div>
+
+</div>
+
+<div class="gallery-button">
+  <a href="#contact">View More</a>
+</div>
+```
+
+  </div>
+
+</section>
+
+<style>
+.gallery-section {
+  padding: 100px 20px;
+  background: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.gallery-container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.gallery-heading {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 50px;
+}
+
+.gallery-badge {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 50px;
+  background: #eff6ff;
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.gallery-heading h2 {
+  margin: 17px 0 12px;
+  color: #0f172a;
+  font-size: clamp(32px, 5vw, 50px);
+  line-height: 1.1;
+}
+
+.gallery-heading p {
+  margin: 0;
+  color: #64748b;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.gallery-item {
+  position: relative;
+  height: 280px;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #e2e8f0;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, .08);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform .5s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.08);
+}
+
+.gallery-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 50px 20px 20px;
+  color: #fff;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,.82),
+    rgba(0,0,0,0)
+  );
+  transform: translateY(8px);
+  transition: .3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+  transform: translateY(0);
+}
+
+.gallery-overlay span {
+  display: inline-block;
+  margin-bottom: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: .85;
+}
+
+.gallery-overlay h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.gallery-button {
+  text-align: center;
+  margin-top: 45px;
+}
+
+.gallery-button a {
+  display: inline-block;
+  padding: 14px 28px;
+  border-radius: 12px;
+  background: #0f172a;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  transition: .25s ease;
+}
+
+.gallery-button a:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 1000px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gallery-item {
+    height: 230px;
+  }
+
+  .gallery-section {
+    padding: 70px 15px;
+  }
+}
+
+@media (max-width: 450px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-item {
+    height: 280px;
+  }
+}
+</style>
+
