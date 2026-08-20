@@ -137,7 +137,6 @@
       <div class="lang-switch" aria-label="Language selector">
           <button type="button" class="lang-btn active" data-lang="en">EN</button>
           <button type="button" class="lang-btn" data-lang="ur">اردو</button>
-          <button type="button" class="lang-btn" data-lang="ps">پښتو</button>
         </div>
       <div class="navlinks" id="navLinks">
         <a href="#home" data-i18n="navHome">Home</a><a href="#about" data-i18n="navAbout">About</a><a href="#programs" data-i18n="navPrograms">Programs</a>
@@ -346,18 +345,6 @@
         applyEyebrow:"مدد کی ضرورت ہے؟",applyTitle:"مدد کے لیے درخواست دیں",
         contactEyebrow:"رابطے میں رہیں",contactTitle:"ہم سے رابطہ کریں"
       }
-      ps: {
-        navHome:"کور",navAbout:"زموږ په اړه",navPrograms:"پروګرامونه",navProjects:"پروژې",navTeam:"ټیم",navGallery:"ګالري",navContact:"اړیکه",
-        heroEyebrow:"🤝 د امید سره د انسانیت خدمت",heroTitle:"په ګډه، موږ بدلون راوستلی شو.",
-        heroText:"محسن ویلفیئر فاؤنډیشن د تعلیم، روغتیايي ملاتړ او د بې وزلۍ د کمولو له لارې د اړمنو ټولنو لپاره د غوره فرصتونو د رامنځته کولو لپاره کار کوي.",
-        donateNow:"❤️ مرسته وکړئ",exploreWork:"زموږ کار وګورئ",
-        aboutEyebrow:"زموږ د فاؤنډیشن په اړه",aboutTitle:"د خلکو مرسته، د ټولنې جوړونه",
-        programEyebrow:"موږ څه کوو",programTitle:"زموږ بنسټیز پروګرامونه",projectsEyebrow:"زموږ کار",projectsTitle:"ځانګړې پروژې",
-        teamEyebrow:"مشرتابه",teamTitle:"زموږ ټیم",galleryEyebrow:"ګالري",galleryTitle:"د خدمت شېبې",
-        impactEyebrow:"خپل رول ادا کړئ",impactTitle:"ستاسو مرسته د یوه انسان ژوند بدلولی شي.",
-        applyEyebrow:"مرستې ته اړتیا لرئ؟",applyTitle:"د مرستې لپاره غوښتنه وکړئ",
-        contactEyebrow:"اړیکه ونیسئ",contactTitle:"له موږ سره اړیکه"
-      }
     };
 
     function setLanguage(lang){
@@ -366,7 +353,7 @@
         if (dict[el.dataset.i18n]) el.textContent = dict[el.dataset.i18n];
       });
       document.documentElement.lang = lang;
-      document.documentElement.dir = (lang === "ur" || lang === "ps") ? "rtl" : "ltr";
+      document.documentElement.dir = lang === "ur" ? "rtl" : "ltr";
       document.querySelectorAll(".lang-btn").forEach(btn => {
         btn.classList.toggle("active", btn.dataset.lang === lang);
       });
