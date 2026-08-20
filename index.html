@@ -21,32 +21,12 @@
     .topbar .container{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
     header{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
     .nav{height:74px;display:flex;align-items:center;justify-content:space-between}
-          .brand{display:flex;align-items:center;gap:11px;font-weight:800;color:var(--dark);font-size:20px}
+    .brand{display:flex;align-items:center;gap:11px;font-weight:800;color:var(--dark);font-size:20px}
 
-      .logo-anim{
-        height:40px;
-        transition:transform .35s ease;
-        cursor:pointer;
-        animation:logoPop 1.2s ease-out;
-      }
-      .logo-anim:hover{
-        transform:rotate(360deg) scale(1.15);
-      }
-      @keyframes logoPop{
-        0%{transform:scale(0.5);opacity:0}
-        60%{transform:scale(1.15);opacity:1}
-        100%{transform:scale(1)}
-      }
 
-     41   .lang-switch{...}
-   lang-btn{...}
-  lang-btn:hover,.lang-btn.active{...}
-   
-   lang-switch{...}   ← same dobara
-  lang-btn{...}       ← same dobara
-   lang-btn:hover...   ← same dobara
-    lang-switch{display:flex;gap:4px;align-items:center;margin-left:2px}
-    lang-btn{border:1px solid var(--border);background:#fff;color:var(--dark);border-radius:999px;padding:7px 11px;font-size:12px;font-weight:800;cursor:pointer;transition:.2s}
+
+    .lang-switch{display:flex;gap:4px;align-items:center;margin-left:2px}
+    .lang-btn{border:1px solid var(--border);background:#fff;color:var(--dark);border-radius:999px;padding:7px 11px;font-size:12px;font-weight:800;cursor:pointer;transition:.2s}
     .lang-btn:hover,.lang-btn.active{background:var(--primary);border-color:var(--primary);color:#fff}
     html[dir="rtl"] body{font-family:Arial,"Noto Nastaliq Urdu","Noto Sans Arabic",sans-serif}
     html[dir="rtl"] .topbar .container{direction:rtl}
@@ -117,7 +97,10 @@
     .projects{background:var(--light)}
     .project{padding:0;overflow:hidden}.project-img{height:210px;background-size:cover;background-position:center}
     .project-body{padding:23px}.tag{display:inline-block;font-size:12px;color:var(--primary);font-weight:800;background:#e7f6f0;padding:5px 9px;border-radius:99px;margin-bottom:8px}
-    .team-card{text-align:center}.avatar{width:100px;height:100px;border-radius:50%;margin:0 auto 16px;background:linear-gradient(135deg,#d8eee5,#8bc9b2);display:grid;place-items:center;font-size:36px;color:var(--primary);font-weight:800}
+    .team-card{text-align:center}
+    .founder-photo{width:180px;height:auto;max-height:240px;border-radius:12px;margin:0 auto 18px;object-fit:contain;border:0;box-shadow:0 10px 25px rgba(16,35,29,.15)}
+    .founder-intro{margin-top:14px;color:#68766f;font-size:14px;line-height:1.7}
+.avatar{width:100px;height:100px;border-radius:50%;margin:0 auto 16px;background:linear-gradient(135deg,#d8eee5,#8bc9b2);display:grid;place-items:center;font-size:36px;color:var(--primary);font-weight:800}
     .team-card small{color:var(--primary);font-weight:700}
     .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.gallery div{height:190px;border-radius:15px;background-size:cover;background-position:center}
     .cta{background:linear-gradient(135deg,var(--primary2),var(--primary));color:#fff;text-align:center}.cta h2{color:#fff}.cta p{max-width:650px;margin:0 auto 25px;color:#e8f8f2}
@@ -152,7 +135,7 @@
 
   <header>
     <nav class="container nav">
-     <img class="brand-logo logo-motion logo-anim" src="mohsin-welfare-logo.png" alt="Mohsin Welfare Foundation Logo">
+      <a href="#home" class="brand"><img class="brand-logo logo-motion" src="mohsin-welfare-logo.png" alt="Mohsin Welfare Foundation Logo"> Mohsin Welfare Foundation</a>
       <button class="menu" id="menuBtn" aria-label="Open menu">☰</button>
       <div class="lang-switch" aria-label="Language selector">
           <button type="button" class="lang-btn active" data-lang="en">EN</button>
@@ -232,11 +215,15 @@
       <div class="container">
         <div class="section-head reveal"><span data-i18n="teamEyebrow">Leadership</span><h2 data-i18n="teamTitle">Our Team</h2><p>The people helping guide the foundation and its community work.</p></div>
         <div class="cards">
-  <article class="card team-card reveal"><div class="avatar">MMM</div><h3>Muhammad Mohsin Mushtaq</h3><small>Founder</small></article>
-  <article class="card team-card reveal"><div class="avatar">UK</div><h3>Uzair Khan</h3><small>Naib Chairman</small></article>
-  <article class="card team-card reveal"><div class="avatar">SA</div><h3>Salman Aziz</h3><small>Finance</small></article>
-  <article class="card team-card reveal"><div class="avatar">SK</div><h3>Salman Khan</h3><small>Media</small></article>
-</div>
+          <article class="card team-card reveal">
+            <img class="founder-photo" src="founder.jpg" alt="Muhammad Mohsin Mushtaq — Founder">
+            <h3>Muhammad Mohsin Mushtaq</h3>
+            <small>Founder</small>
+            <p class="founder-intro">Muhammad Mohsin Mushtaq is the Founder of Mohsin Welfare Foundation, dedicated to serving humanity and supporting communities through education, health and poverty relief.</p>
+          </article>
+          <article class="card team-card reveal"><div class="avatar">UK</div><h3>Uzair Khan</h3><small>Naib Chairman</small></article>
+          <article class="card team-card reveal"><div class="avatar">SA</div><h3>Salman Aziz</h3><small>Finance</small></article>
+          <article class="card team-card reveal"><div class="avatar">SK</div><h3>Salman Khan</h3><small>Media</small></article>
         </div>
       </div>
     </section>
@@ -387,5 +374,22 @@
 
     setLanguage(localStorage.getItem("mwf-language") || "en");
   </script>
+<script>
+    const founderIntro = {
+      en: "Muhammad Mohsin Mushtaq is the Founder of Mohsin Welfare Foundation, dedicated to serving humanity and supporting communities through education, health and poverty relief.",
+      ur: "محمد محسن مشتاق محسن ویلفیئر فاؤنڈیشن کے بانی ہیں۔ وہ انسانیت کی خدمت اور تعلیم، صحت اور غربت کے خاتمے کے ذریعے ضرورت مند افراد اور معاشروں کی مدد کے لیے کام کر رہے ہیں۔"
+    };
+    function updateFounderIntro(lang){
+      const el=document.querySelector(".founder-intro");
+      if(el) el.textContent=founderIntro[lang] || founderIntro.en;
+    }
+    const originalSetLanguage = setLanguage;
+    setLanguage = function(lang){
+      originalSetLanguage(lang);
+      updateFounderIntro(lang);
+    };
+    updateFounderIntro(localStorage.getItem("mwf-language") || "en");
+  </script>
+
 </body>
 </html>
