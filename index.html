@@ -21,10 +21,27 @@
     .topbar .container{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
     header{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
     .nav{height:74px;display:flex;align-items:center;justify-content:space-between}
-    .brand{display:flex;align-items:center;gap:11px;font-weight:800;color:var(--dark);font-size:20px}
+          .brand{display:flex;align-items:center;gap:11px;font-weight:800;color:var(--dark);font-size:20px}
 
+      .logo-anim{
+        height:40px;
+        transition:transform .35s ease;
+        cursor:pointer;
+        animation:logoPop 1.2s ease-out;
+      }
+      .logo-anim:hover{
+        transform:rotate(360deg) scale(1.15);
+      }
+      @keyframes logoPop{
+        0%{transform:scale(0.5);opacity:0}
+        60%{transform:scale(1.15);opacity:1}
+        100%{transform:scale(1)}
+      }
 
-
+      .lang-switch{display:flex;gap:4px;align-items:center;margin-left:2px}
+      .lang-btn{border:1px solid var(--border);background:#fff;color:var(--dark);border-radius:999px;padding:7px 11px;font-size:12px;font-weight:800}
+      .lang-btn:hover,.lang-btn.active{background:var(--primary);border-color:var(--primary);color:#fff}
+                  
     .lang-switch{display:flex;gap:4px;align-items:center;margin-left:2px}
     .lang-btn{border:1px solid var(--border);background:#fff;color:var(--dark);border-radius:999px;padding:7px 11px;font-size:12px;font-weight:800;cursor:pointer;transition:.2s}
     .lang-btn:hover,.lang-btn.active{background:var(--primary);border-color:var(--primary);color:#fff}
@@ -132,7 +149,7 @@
 
   <header>
     <nav class="container nav">
-      <a href="#home" class="brand"><img class="brand-logo logo-motion" src="mohsin-welfare-logo.png" alt="Mohsin Welfare Foundation Logo"> Mohsin Welfare Foundation</a>
+     <img class="brand-logo logo-motion logo-anim" src="mohsin-welfare-logo.png" alt="Mohsin Welfare Foundation Logo">
       <button class="menu" id="menuBtn" aria-label="Open menu">☰</button>
       <div class="lang-switch" aria-label="Language selector">
           <button type="button" class="lang-btn active" data-lang="en">EN</button>
