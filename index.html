@@ -22,6 +22,43 @@
     header{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
     .nav{height:74px;display:flex;align-items:center;justify-content:space-between}
     .brand{display:flex;align-items:center;gap:11px;font-weight:800;color:var(--dark);font-size:20px}
+
+
+
+    .lang-switch{display:flex;gap:4px;align-items:center;margin-left:2px}
+    .lang-btn{border:1px solid var(--border);background:#fff;color:var(--dark);border-radius:999px;padding:7px 11px;font-size:12px;font-weight:800;cursor:pointer;transition:.2s}
+    .lang-btn:hover,.lang-btn.active{background:var(--primary);border-color:var(--primary);color:#fff}
+    html[dir="rtl"] body{font-family:Arial,"Noto Nastaliq Urdu","Noto Sans Arabic",sans-serif}
+    html[dir="rtl"] .topbar .container{direction:rtl}
+    html[dir="rtl"] .nav,html[dir="rtl"] .navlinks{direction:rtl}
+    html[dir="rtl"] .hero-content,html[dir="rtl"] .section-head,html[dir="rtl"] .about-copy,
+    html[dir="rtl"] .card,html[dir="rtl"] .contact-info,html[dir="rtl"] .form{direction:rtl}
+    html[dir="rtl"] .actions{direction:rtl}
+    html[dir="rtl"] .checks div,html[dir="rtl"] .info-item{flex-direction:row-reverse}
+    html[dir="rtl"] .two{direction:rtl}
+    html[dir="rtl"] .brand{direction:rtl}
+    @media(max-width:850px){.lang-switch{justify-content:center;margin:4px 0 8px}}
+    .logo-motion{
+      transition:transform .35s cubic-bezier(.2,.8,.2,1),filter .35s ease;
+      transform-origin:center;
+      cursor:pointer;
+      will-change:transform;
+    }
+    .logo-motion:hover{
+      transform:scale(1.09) rotate(3deg);
+      filter:drop-shadow(0 7px 12px rgba(8,127,91,.28));
+    }
+    .logo-motion.logo-active{
+      animation:logoPop .65s ease;
+    }
+    @keyframes logoPop{
+      0%{transform:scale(1) rotate(0)}
+      35%{transform:scale(1.16) rotate(-5deg)}
+      65%{transform:scale(1.08) rotate(4deg)}
+      100%{transform:scale(1) rotate(0)}
+    }
+    .brand-logo{width:48px;height:48px;object-fit:contain;border-radius:50%;flex:none}
+    footer .brand-logo{width:52px;height:52px}
     .logo{width:44px;height:44px;border-radius:13px;background:linear-gradient(135deg,var(--primary),#12a878);color:#fff;display:grid;place-items:center;font-size:22px;box-shadow:var(--shadow)}
     .navlinks{display:flex;align-items:center;gap:22px;font-size:14px;font-weight:700}
     .navlinks a:hover{color:var(--primary)}
@@ -95,12 +132,17 @@
 
   <header>
     <nav class="container nav">
-      <a href="#home" class="brand"><span class="logo">MW</span> Mohsin Welfare Foundation</a>
+      <a href="#home" class="brand"><img class="brand-logo logo-motion" src="mohsin-welfare-logo.png" alt="Mohsin Welfare Foundation Logo"> Mohsin Welfare Foundation</a>
       <button class="menu" id="menuBtn" aria-label="Open menu">☰</button>
+      <div class="lang-switch" aria-label="Language selector">
+          <button type="button" class="lang-btn active" data-lang="en">EN</button>
+          <button type="button" class="lang-btn" data-lang="ur">اردو</button>
+          <button type="button" class="lang-btn" data-lang="ps">پښتو</button>
+        </div>
       <div class="navlinks" id="navLinks">
-        <a href="#home">Home</a><a href="#about">About</a><a href="#programs">Programs</a>
-        <a href="#projects">Projects</a><a href="#team">Team</a><a href="#gallery">Gallery</a>
-        <a href="#contact" class="btn">Contact</a>
+        <a href="#home" data-i18n="navHome">Home</a><a href="#about" data-i18n="navAbout">About</a><a href="#programs" data-i18n="navPrograms">Programs</a>
+        <a href="#projects" data-i18n="navProjects">Projects</a><a href="#team" data-i18n="navTeam">Team</a><a href="#gallery" data-i18n="navGallery">Gallery</a>
+        <a href="#contact" class="btn" data-i18n="navContact">Contact</a>
       </div>
     </nav>
   </header>
@@ -108,12 +150,12 @@
   <main>
     <section class="hero" id="home">
       <div class="container hero-content">
-        <span class="eyebrow">🤝 Serving Humanity With Hope</span>
-        <h1>Together, We Can Make a Difference.</h1>
-        <p>Mohsin Welfare Foundation works to create better opportunities through education, healthcare support and poverty relief for communities in need.</p>
+        <span class="eyebrow" data-i18n="heroEyebrow">🤝 Serving Humanity With Hope</span>
+        <h1 data-i18n="heroTitle">Together, We Can Make a Difference.</h1>
+        <p data-i18n="heroText">Mohsin Welfare Foundation works to create better opportunities through education, healthcare support and poverty relief for communities in need.</p>
         <div class="actions">
-          <a class="btn" href="#donate">❤️ Donate Now</a>
-          <a class="btn outline" href="#programs">Explore Our Work</a>
+          <a class="btn" href="#donate" data-i18n="donateNow">❤️ Donate Now</a>
+          <a class="btn outline" href="#programs" data-i18n="exploreWork">Explore Our Work</a>
         </div>
       </div>
     </section>
@@ -132,7 +174,7 @@
         <div class="about-image reveal"></div>
         <div class="about-copy reveal">
           <span class="eyebrow" style="color:var(--primary);background:#e7f6f0;border:0">About Our Foundation</span>
-          <h2>Helping People. Building Communities.</h2>
+          <h2 data-i18n="aboutTitle">Helping People. Building Communities.</h2>
           <p>Mohsin Welfare Foundation is a community-focused welfare initiative dedicated to serving people with dignity, compassion and transparency.</p>
           <p>Our work focuses on practical support and long-term opportunities so that individuals and families can move toward a better future.</p>
           <div class="checks">
@@ -147,7 +189,7 @@
 
     <section id="programs">
       <div class="container">
-        <div class="section-head reveal"><span>What We Do</span><h2>Our Core Programs</h2><p>Focused initiatives designed around the needs of our local communities.</p></div>
+        <div class="section-head reveal"><span data-i18n="programEyebrow">What We Do</span><h2 data-i18n="programTitle">Our Core Programs</h2><p>Focused initiatives designed around the needs of our local communities.</p></div>
         <div class="cards">
           <article class="card reveal"><div class="icon">📚</div><h3>Education</h3><p>We support educational opportunities and encourage young people to build a brighter future through knowledge.</p></article>
           <article class="card reveal"><div class="icon">🩺</div><h3>Health</h3><p>We aim to connect people in need with essential healthcare support and community assistance.</p></article>
@@ -158,7 +200,7 @@
 
     <section class="projects" id="projects">
       <div class="container">
-        <div class="section-head reveal"><span>Our Work</span><h2>Featured Projects</h2><p>Replace these sample projects with your real activities and impact stories.</p></div>
+        <div class="section-head reveal"><span data-i18n="projectsEyebrow">Our Work</span><h2 data-i18n="projectsTitle">Featured Projects</h2><p>Replace these sample projects with your real activities and impact stories.</p></div>
         <div class="cards">
           <article class="card project reveal"><div class="project-img" style="background-image:url('https://images.unsplash.com/photo-1504159506876-f8338247a14a?auto=format&fit=crop&w=900&q=80')"></div><div class="project-body"><span class="tag">Education</span><h3>Learning Support</h3><p>Helping students access learning resources and opportunities.</p></div></article>
           <article class="card project reveal"><div class="project-img" style="background-image:url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=900&q=80')"></div><div class="project-body"><span class="tag">Health</span><h3>Community Health Support</h3><p>Community-focused assistance for people who need healthcare support.</p></div></article>
@@ -169,7 +211,7 @@
 
     <section id="team">
       <div class="container">
-        <div class="section-head reveal"><span>Leadership</span><h2>Our Team</h2><p>The people helping guide the foundation and its community work.</p></div>
+        <div class="section-head reveal"><span data-i18n="teamEyebrow">Leadership</span><h2 data-i18n="teamTitle">Our Team</h2><p>The people helping guide the foundation and its community work.</p></div>
         <div class="cards">
           <article class="card team-card reveal"><div class="avatar">MM</div><h3>Muhammad Mohsin Mushtaq</h3><small>Founder</small></article>
           <article class="card team-card reveal"><div class="avatar">UK</div><h3>Uzair Khan</h3><small>Naib Chairman</small></article>
@@ -181,7 +223,7 @@
 
     <section id="gallery" class="about">
       <div class="container">
-        <div class="section-head reveal"><span>Gallery</span><h2>Moments of Service</h2><p>Add your real project photos here by replacing the image URLs.</p></div>
+        <div class="section-head reveal"><span data-i18n="galleryEyebrow">Gallery</span><h2 data-i18n="galleryTitle">Moments of Service</h2><p>Add your real project photos here by replacing the image URLs.</p></div>
         <div class="gallery">
           <div class="reveal" style="background-image:url('https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=700&q=80')"></div>
           <div class="reveal" style="background-image:url('https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=700&q=80')"></div>
@@ -198,7 +240,7 @@
     <section class="cta" id="donate">
       <div class="container reveal">
         <span class="eyebrow">Make an Impact</span>
-        <h2>Your Support Can Change a Life.</h2>
+        <h2 data-i18n="impactTitle">Your Support Can Change a Life.</h2>
         <p>Whether you volunteer, donate or simply share our mission, your support can help us reach more people in need.</p>
         <a class="btn" href="#contact" style="background:#fff;color:var(--primary)">Donate / Support Us</a>
       </div>
@@ -206,7 +248,7 @@
 
     <section id="apply">
       <div class="container">
-        <div class="section-head reveal"><span>Need Assistance?</span><h2>Apply for Help</h2><p>Submit your basic information. Your application will be submitted securely through our online form.</p></div>
+        <div class="section-head reveal"><span data-i18n="applyEyebrow">Need Assistance?</span><h2 data-i18n="applyTitle">Apply for Help</h2><p>Submit your basic information. Your application will be submitted securely through our online form.</p></div>
         <div class="form-wrap">
           <div class="contact-info reveal">
             <h3>Assistance Request</h3><p style="margin-top:10px;color:#68766f">Please provide accurate information. Our team can review requests and contact applicants for further details.</p>
@@ -228,7 +270,7 @@
 
     <section class="contact" id="contact">
       <div class="container">
-        <div class="section-head reveal"><span>Get In Touch</span><h2>Contact Us</h2><p>Have a question, want to volunteer, or want to support our work? Contact us.</p></div>
+        <div class="section-head reveal"><span data-i18n="contactEyebrow">Get In Touch</span><h2 data-i18n="contactTitle">Contact Us</h2><p>Have a question, want to volunteer, or want to support our work? Contact us.</p></div>
         <div class="form-wrap">
           <div class="contact-info reveal">
             <h3>Mohsin Welfare Foundation</h3>
@@ -255,8 +297,8 @@
 
   <footer>
     <div class="container footer-grid">
-      <div><div class="brand" style="color:#fff"><span class="logo">MW</span> Mohsin Welfare Foundation</div><p style="margin-top:15px">Serving humanity through education, health and poverty relief.</p></div>
-      <div><div class="footer-title">Quick Links</div><div class="footer-links"><a href="#about">About</a><a href="#programs">Programs</a><a href="#projects">Projects</a><a href="#apply">Apply for Help</a></div></div>
+      <div><div class="brand" style="color:#fff"><img class="brand-logo logo-motion" src="mohsin-welfare-logo.png" alt="Mohsin Welfare Foundation Logo"> Mohsin Welfare Foundation</div><p style="margin-top:15px">Serving humanity through education, health and poverty relief.</p></div>
+      <div><div class="footer-title">Quick Links</div><div class="footer-links"><a href="#about" data-i18n="navAbout">About</a><a href="#programs" data-i18n="navPrograms">Programs</a><a href="#projects" data-i18n="navProjects">Projects</a><a href="#apply">Apply for Help</a></div></div>
       <div><div class="footer-title">Contact</div><div class="footer-links"><span>0341-5164034</span><span>muhammadmohsinmushtaq29@gmail.com</span><span>Aloch, Puran, Shangla</span></div></div>
     </div>
     <div class="container copyright">© <span id="year"></span> Mohsin Welfare Foundation. All Rights Reserved.</div>
@@ -269,6 +311,73 @@
     const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.12});
     document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
     document.getElementById('year').textContent=new Date().getFullYear();
+
+    document.querySelectorAll('.logo-motion').forEach(logo => {
+      logo.addEventListener('click', () => {
+        logo.classList.remove('logo-active');
+        void logo.offsetWidth;
+        logo.classList.add('logo-active');
+        setTimeout(() => logo.classList.remove('logo-active'), 700);
+      });
+    });
+
+    const translations = {
+      en: {
+        navHome:"Home",navAbout:"About",navPrograms:"Programs",navProjects:"Projects",navTeam:"Team",navGallery:"Gallery",navContact:"Contact",
+        heroEyebrow:"🤝 Serving Humanity With Hope",heroTitle:"Together, We Can Make a Difference.",
+        heroText:"Mohsin Welfare Foundation works to create better opportunities through education, healthcare support and poverty relief for communities in need.",
+        donateNow:"❤️ Donate Now",exploreWork:"Explore Our Work",
+        aboutEyebrow:"About Our Foundation",aboutTitle:"Helping People. Building Communities.",
+        programEyebrow:"What We Do",programTitle:"Our Core Programs",projectsEyebrow:"Our Work",projectsTitle:"Featured Projects",
+        teamEyebrow:"Leadership",teamTitle:"Our Team",galleryEyebrow:"Gallery",galleryTitle:"Moments of Service",
+        impactEyebrow:"Make an Impact",impactTitle:"Your Support Can Change a Life.",
+        applyEyebrow:"Need Assistance?",applyTitle:"Apply for Help",
+        contactEyebrow:"Get In Touch",contactTitle:"Contact Us"
+      },
+      ur: {
+        navHome:"ہوم",navAbout:"ہمارے بارے میں",navPrograms:"پروگرامز",navProjects:"منصوبے",navTeam:"ٹیم",navGallery:"گیلری",navContact:"رابطہ",
+        heroEyebrow:"🤝 امید کے ساتھ انسانیت کی خدمت",heroTitle:"مل کر ہم ایک بہتر تبدیلی لا سکتے ہیں۔",
+        heroText:"محسن ویلفیئر فاؤنڈیشن تعلیم، صحت اور غربت کے خاتمے کے ذریعے ضرورت مند افراد اور خاندانوں کے لیے بہتر مواقع پیدا کرنے کے لیے کام کرتی ہے۔",
+        donateNow:"❤️ عطیہ دیں",exploreWork:"ہمارا کام دیکھیں",
+        aboutEyebrow:"ہماری فاؤنڈیشن کے بارے میں",aboutTitle:"لوگوں کی مدد، معاشرے کی تعمیر",
+        programEyebrow:"ہم کیا کرتے ہیں",programTitle:"ہمارے بنیادی پروگرام",projectsEyebrow:"ہمارا کام",projectsTitle:"نمایاں منصوبے",
+        teamEyebrow:"قیادت",teamTitle:"ہماری ٹیم",galleryEyebrow:"گیلری",galleryTitle:"خدمت کے لمحات",
+        impactEyebrow:"اپنا کردار ادا کریں",impactTitle:"آپ کی مدد ایک زندگی بدل سکتی ہے۔",
+        applyEyebrow:"مدد کی ضرورت ہے؟",applyTitle:"مدد کے لیے درخواست دیں",
+        contactEyebrow:"رابطے میں رہیں",contactTitle:"ہم سے رابطہ کریں"
+      }
+      ps: {
+        navHome:"کور",navAbout:"زموږ په اړه",navPrograms:"پروګرامونه",navProjects:"پروژې",navTeam:"ټیم",navGallery:"ګالري",navContact:"اړیکه",
+        heroEyebrow:"🤝 د امید سره د انسانیت خدمت",heroTitle:"په ګډه، موږ بدلون راوستلی شو.",
+        heroText:"محسن ویلفیئر فاؤنډیشن د تعلیم، روغتیايي ملاتړ او د بې وزلۍ د کمولو له لارې د اړمنو ټولنو لپاره د غوره فرصتونو د رامنځته کولو لپاره کار کوي.",
+        donateNow:"❤️ مرسته وکړئ",exploreWork:"زموږ کار وګورئ",
+        aboutEyebrow:"زموږ د فاؤنډیشن په اړه",aboutTitle:"د خلکو مرسته، د ټولنې جوړونه",
+        programEyebrow:"موږ څه کوو",programTitle:"زموږ بنسټیز پروګرامونه",projectsEyebrow:"زموږ کار",projectsTitle:"ځانګړې پروژې",
+        teamEyebrow:"مشرتابه",teamTitle:"زموږ ټیم",galleryEyebrow:"ګالري",galleryTitle:"د خدمت شېبې",
+        impactEyebrow:"خپل رول ادا کړئ",impactTitle:"ستاسو مرسته د یوه انسان ژوند بدلولی شي.",
+        applyEyebrow:"مرستې ته اړتیا لرئ؟",applyTitle:"د مرستې لپاره غوښتنه وکړئ",
+        contactEyebrow:"اړیکه ونیسئ",contactTitle:"له موږ سره اړیکه"
+      }
+    };
+
+    function setLanguage(lang){
+      const dict = translations[lang] || translations.en;
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        if (dict[el.dataset.i18n]) el.textContent = dict[el.dataset.i18n];
+      });
+      document.documentElement.lang = lang;
+      document.documentElement.dir = (lang === "ur" || lang === "ps") ? "rtl" : "ltr";
+      document.querySelectorAll(".lang-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.lang === lang);
+      });
+      localStorage.setItem("mwf-language", lang);
+    }
+
+    document.querySelectorAll(".lang-btn").forEach(btn => {
+      btn.addEventListener("click", () => setLanguage(btn.dataset.lang));
+    });
+
+    setLanguage(localStorage.getItem("mwf-language") || "en");
   </script>
 </body>
 </html>
