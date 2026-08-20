@@ -240,18 +240,31 @@
               <a href="https://www.tiktok.com/@mytv_my" target="_blank" aria-label="TikTok">♪</a>
             </div>
           </div>
-          <div class="form reveal">
-            <form onsubmit="demoSubmit(event,'Thank you! Your message has been prepared.')">
-              <div class="two"><div><label>Name</label><input required placeholder="Your name"></div><div><label>Email</label><input required type="email" placeholder="you@example.com"></div></div>
-              <div><label>Subject</label><input required placeholder="How can we help?"></div>
-              <div><label>Message</label><textarea required placeholder="Write your message..."></textarea></div>
-              <button class="btn" type="submit">Send Message</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
+          <form action="https://formspree.io/f/xgawdvke" method="POST">
+  <div class="two">
+    <div>
+      <label>Name</label>
+      <input type="text" name="name" required placeholder="Your name">
+    </div>
+
+    <div>
+      <label>Email</label>
+      <input type="email" name="email" required placeholder="you@example.com">
+    </div>
+  </div>
+
+  <div>
+    <label>Subject</label>
+    <input type="text" name="subject" required placeholder="How can we help?">
+  </div>
+
+  <div>
+    <label>Message</label>
+    <textarea name="message" required placeholder="Write your message..."></textarea>
+  </div>
+
+  <button class="btn" type="submit">Send Message</button>
+</form>
 
   <footer>
     <div class="container footer-grid">
