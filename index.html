@@ -122,7 +122,49 @@
       .topbar .container{justify-content:center;text-align:center}.hero{min-height:620px}.hero-content{padding:65px 0}.hero p{font-size:16px}
       section{padding:65px 0}.cards{grid-template-columns:1fr}.gallery{grid-template-columns:1fr 1fr}.gallery div{height:140px}.two{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}.stats{margin-top:-30px}.stat{padding:22px 8px}.stat strong{font-size:25px}
     }
-  </style>
+  
+/* No-Code Editor */
+.editor-launch{position:fixed;right:18px;bottom:18px;z-index:3000;border:0;border-radius:999px;padding:13px 18px;background:#10231d;color:#fff;font-weight:800;cursor:pointer;box-shadow:0 12px 30px rgba(16,35,29,.25)}
+.editor-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.58);z-index:2999;padding:20px;overflow:auto}.editor-overlay.open{display:block}
+.editor-panel{width:min(760px,100%);margin:20px auto;background:#fff;border-radius:22px;padding:25px;box-shadow:0 25px 70px rgba(0,0,0,.25)}
+.editor-panel h2{margin:0 0 6px}.editor-note{font-size:13px;color:#66756e;margin-bottom:18px}.editor-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.editor-field{display:grid;gap:6px}.editor-field.full{grid-column:1/-1}
+.editor-field label{font-weight:800;font-size:13px}.editor-field input,.editor-field textarea{width:100%;padding:11px 12px;border:1px solid #cfded7;border-radius:10px;font:inherit}.editor-field textarea{min-height:95px}.editor-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.editor-close{background:#eef3f0;color:#10231d}
+@media(max-width:650px){.editor-grid{grid-template-columns:1fr}.editor-field.full{grid-column:auto}}
+
+/* Premium motion effects */
+body{overflow-x:hidden}
+.hero{background-size:cover;animation:heroZoom 14s ease-in-out infinite alternate}
+@keyframes heroZoom{from{background-size:100% auto}to{background-size:112% auto}}
+.hero-content{animation:heroIn 1s ease both}
+@keyframes heroIn{from{opacity:0;transform:translateY(35px)}to{opacity:1;transform:none}}
+.card,.stat,.about-image,.gallery div,.contact-info,.form,.project-img,.avatar,.founder-photo{
+  transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s ease,filter .45s ease;
+}
+.card:hover{transform:translateY(-10px) scale(1.015);box-shadow:0 20px 45px rgba(16,35,29,.16)}
+.stat:hover{transform:translateY(-7px);box-shadow:0 15px 30px rgba(16,35,29,.12)}
+.about-image:hover{transform:scale(1.025);filter:saturate(1.08)}
+.gallery div:hover{transform:scale(1.05) rotate(1deg);box-shadow:0 15px 30px rgba(16,35,29,.18);z-index:2}
+.project:hover .project-img{transform:scale(1.06)}
+.avatar:hover,.founder-photo:hover{transform:scale(1.08) rotate(2deg)}
+.btn{position:relative;overflow:hidden}
+.btn:after{content:"";position:absolute;top:0;left:-120%;width:80%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.38),transparent);transform:skewX(-20deg);animation:btnShine 3.5s ease-in-out infinite}
+@keyframes btnShine{0%,65%{left:-120%}85%,100%{left:140%}}
+.icon{animation:iconFloat 3s ease-in-out infinite}
+.cards .card:nth-child(2) .icon{animation-delay:.35s}.cards .card:nth-child(3) .icon{animation-delay:.7s}
+@keyframes iconFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.brand-logo{animation:logoFloat 4s ease-in-out infinite}
+@keyframes logoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.section-head h2{animation:titleGlow 4s ease-in-out infinite}
+@keyframes titleGlow{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+.cta{background-size:180% 180%;animation:gradientMove 8s ease infinite}
+@keyframes gradientMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.reveal{opacity:0;transform:translateY(28px) scale(.98);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
+.reveal.show{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+
+</style>
 </head>
 <body>
 
@@ -390,6 +432,26 @@
     };
     updateFounderIntro(localStorage.getItem("mwf-language") || "en");
   </script>
+
+
+<button class="editor-launch" id="openEditor">✏️ Edit Website</button>
+<div class="editor-overlay" id="editorOverlay"><div class="editor-panel"><h2>✏️ Website Editor</h2><p class="editor-note">Coding ki zaroorat nahi. Information edit karein, Save karein, phir Download Updated Website karke GitHub par upload karein.</p><div class="editor-grid">
+<div class="editor-field"><label>Founder Name</label><input id="editFounderName"></div><div class="editor-field"><label>Founder Role</label><input id="editFounderRole"></div>
+<div class="editor-field full"><label>Founder Introduction — English</label><textarea id="editFounderIntroEn"></textarea></div><div class="editor-field full"><label>Founder Introduction — Urdu</label><textarea id="editFounderIntroUr"></textarea></div>
+<div class="editor-field"><label>Phone</label><input id="editPhone"></div><div class="editor-field"><label>Email</label><input id="editEmail"></div><div class="editor-field full"><label>Address</label><input id="editAddress"></div>
+<div class="editor-field full"><label>Founder Picture</label><input id="editFounderImage" type="file" accept="image/*"></div></div>
+<div class="editor-actions"><button class="btn" id="saveEditor">💾 Save Changes</button><button class="btn" id="downloadEditor">⬇️ Download Updated Website</button><button class="btn editor-close" id="closeEditor">Close</button></div></div></div>
+\n<script>\n(function(){const $=id=>document.getElementById(id);const d0={founderName:"Muhammad Mohsin Mushtaq",founderRole:"Founder",founderIntroEn:"Muhammad Mohsin Mushtaq is the Founder of Mohsin Welfare Foundation, dedicated to serving humanity and supporting communities through education, health and poverty relief.",founderIntroUr:"محمد محسن مشتاق محسن ویلفیئر فاؤنڈیشن کے بانی ہیں۔ وہ انسانیت کی خدمت اور تعلیم، صحت اور غربت کے خاتمے کے ذریعے ضرورت مند افراد اور معاشروں کی مدد کے لیے کام کر رہے ہیں۔",phone:"0341-5164034",email:"muhammadmohsinmushtaq29@gmail.com",address:"Aloch, Tehsil Puran, District Shangla, Khyber Pakhtunkhwa"};let d=JSON.parse(localStorage.getItem("mwf-data")||"null")||d0,img=localStorage.getItem("mwf-founder-img")||"";function fill(){editFounderName.value=d.founderName;editFounderRole.value=d.founderRole;editFounderIntroEn.value=d.founderIntroEn;editFounderIntroUr.value=d.founderIntroUr;editPhone.value=d.phone;editEmail.value=d.email;editAddress.value=d.address}function apply(){let c=document.querySelectorAll('.team-card')[0];if(c){c.querySelector('h3').textContent=d.founderName;c.querySelector('small').textContent=d.founderRole;let p=c.querySelector('.founder-intro');if(p)p.textContent=document.documentElement.lang==='ur'?d.founderIntroUr:d.founderIntroEn}if(img){let x=document.querySelector('.founder-photo');if(x)x.src=img}}openEditor.onclick=()=>{fill();editorOverlay.classList.add('open')};closeEditor.onclick=()=>editorOverlay.classList.remove('open');saveEditor.onclick=()=>{d={founderName:editFounderName.value||d0.founderName,founderRole:editFounderRole.value||d0.founderRole,founderIntroEn:editFounderIntroEn.value||d0.founderIntroEn,founderIntroUr:editFounderIntroUr.value||d0.founderIntroUr,phone:editPhone.value||d0.phone,email:editEmail.value||d0.email,address:editAddress.value||d0.address};localStorage.setItem('mwf-data',JSON.stringify(d));if(img)localStorage.setItem('mwf-founder-img',img);apply();alert('Saved on this browser!')};editFounderImage.onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{img=r.result;localStorage.setItem('mwf-founder-img',img);apply()};r.readAsDataURL(f)};downloadEditor.onclick=()=>{let out=document.documentElement.outerHTML;if(img)out=out.replace(/(<img class="founder-photo"[^>]*src=")[^"]*(")/,"$1"+img.replace(/"/g,'&quot;')+"$2");let a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['<!DOCTYPE html>\\n'+out],{type:'text/html'}));a.download='index_english_urdu_updated.html';a.click()};apply()})();\n</script>\n
+<script>
+(function(){
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const glow=document.createElement('div');
+  glow.setAttribute('aria-hidden','true');
+  glow.style.cssText='position:fixed;width:180px;height:180px;border-radius:50%;pointer-events:none;z-index:0;left:0;top:0;opacity:.10;background:radial-gradient(circle,rgba(8,127,91,.55),transparent 68%);transform:translate(-50%,-50%);transition:left .18s ease-out,top .18s ease-out';
+  document.body.appendChild(glow);
+  document.addEventListener('mousemove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px'});
+})();
+</script>
 
 </body>
 </html>
