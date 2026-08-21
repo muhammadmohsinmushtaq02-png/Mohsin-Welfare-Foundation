@@ -438,6 +438,216 @@ footer .brand-logo{box-shadow:0 10px 30px rgba(0,0,0,.25)}
 }
 
 </style>
+
+<style id="modern-beautiful-upgrade">
+/* ===== ULTRA MODERN / MOST BEAUTIFUL UI UPGRADE ===== */
+:root{
+  --mwf-green:#087f5b;
+  --mwf-deep:#04150f;
+  --mwf-gold:#d8b15a;
+  --mwf-mint:#eff9f5;
+  --mwf-glass:rgba(255,255,255,.76);
+}
+body{
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  background:#fbfdfc;
+}
+body:before{
+  content:"";
+  position:fixed; inset:0; pointer-events:none; z-index:-2;
+  background:
+    radial-gradient(circle at 10% 15%,rgba(8,127,91,.055),transparent 25%),
+    radial-gradient(circle at 90% 65%,rgba(216,177,90,.045),transparent 24%);
+}
+.topbar{
+  background:linear-gradient(110deg,#03120d,#0a2d21 50%,#03120d);
+  border-bottom:1px solid rgba(216,177,90,.18);
+}
+header{
+  background:rgba(255,255,255,.78)!important;
+  backdrop-filter:blur(20px) saturate(150%);
+  -webkit-backdrop-filter:blur(20px) saturate(150%);
+  box-shadow:0 10px 35px rgba(4,21,15,.06);
+}
+.brand{
+  font-weight:900!important;
+  letter-spacing:-.04em!important;
+}
+.brand-logo{
+  border:2px solid rgba(255,255,255,.95);
+  box-shadow:0 8px 28px rgba(8,127,91,.18)!important;
+}
+.navlinks a:not(.btn):after{height:3px;border-radius:99px}
+.hero{
+  min-height:760px!important;
+  position:relative;
+  overflow:hidden;
+  background:
+    linear-gradient(105deg,rgba(2,18,12,.94) 0%,rgba(3,32,22,.72) 46%,rgba(3,24,17,.28) 100%),
+    url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=2200&q=90') center/cover;
+}
+.hero:before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(circle at 78% 25%,rgba(216,177,90,.18),transparent 24%),
+    radial-gradient(circle at 62% 80%,rgba(8,127,91,.22),transparent 30%);
+}
+.hero:after{
+  content:"";position:absolute;left:0;right:0;bottom:-1px;height:130px;z-index:1;
+  background:linear-gradient(transparent,#fbfdfc);
+}
+.hero-content{z-index:2!important}
+.eyebrow{
+  border:1px solid rgba(216,177,90,.38)!important;
+  background:rgba(255,255,255,.10)!important;
+  box-shadow:0 10px 35px rgba(0,0,0,.12);
+  backdrop-filter:blur(12px);
+}
+.hero h1{
+  font-size:clamp(48px,7vw,86px)!important;
+  line-height:.98!important;
+  letter-spacing:-.065em!important;
+  max-width:900px;
+}
+.hero p{font-size:19px!important;max-width:720px}
+.actions .btn{
+  padding:15px 25px!important;
+  border-radius:14px!important;
+}
+.actions .btn:first-child{
+  background:linear-gradient(135deg,#d8b15a,#f1d58c)!important;
+  color:#12231b!important;
+}
+.actions .btn.outline{
+  background:rgba(255,255,255,.09)!important;
+  border-color:rgba(255,255,255,.55)!important;
+  backdrop-filter:blur(10px);
+}
+.stats{margin-top:-82px!important;z-index:5}
+.stats-grid{
+  border-radius:28px!important;
+  background:rgba(255,255,255,.88)!important;
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,.8)!important;
+  box-shadow:0 30px 80px rgba(4,21,15,.14)!important;
+}
+.stat{position:relative}
+.stat strong{font-size:38px!important}
+.stat:before{
+  content:"";position:absolute;top:18px;bottom:18px;left:0;width:1px;
+  background:var(--mwf-mint);
+}
+.stat:first-child:before{display:none}
+section{padding:110px 0!important}
+.section-head span{
+  display:inline-flex!important;
+  padding:7px 12px;
+  border-radius:999px;
+  background:var(--mwf-mint);
+}
+.section-head h2{
+  font-size:clamp(34px,4.5vw,52px)!important;
+}
+.about{
+  position:relative;
+  background:
+    radial-gradient(circle at 0 50%,rgba(8,127,91,.08),transparent 28%),
+    linear-gradient(180deg,#f4faf7,#edf6f2)!important;
+}
+.about-image{
+  min-height:520px!important;
+  border-radius:32px!important;
+  border:10px solid rgba(255,255,255,.75)!important;
+  box-shadow:0 30px 80px rgba(4,21,15,.14)!important;
+}
+.cards{gap:28px!important}
+.card{
+  position:relative;
+  border-radius:26px!important;
+  padding:32px!important;
+  border:1px solid rgba(219,231,225,.85)!important;
+  box-shadow:0 14px 45px rgba(4,21,15,.06)!important;
+  overflow:hidden;
+}
+.card:after{
+  content:"";position:absolute;width:120px;height:120px;right:-55px;top:-55px;
+  border-radius:50%;background:rgba(8,127,91,.045);transition:.4s;
+}
+.card:hover:after{transform:scale(2)}
+.icon{
+  width:68px!important;height:68px!important;border-radius:20px!important;
+  background:linear-gradient(135deg,#e9f8f2,#d6efe5)!important;
+  box-shadow:0 12px 30px rgba(8,127,91,.12)!important;
+}
+.project-img{
+  height:250px!important;
+  border-radius:0!important;
+}
+.project-body{padding:30px!important}
+.projects{background:linear-gradient(180deg,#f8fbfa,#f0f7f4)!important}
+.team-card{padding:38px 28px!important}
+.founder-photo{
+  width:190px!important;max-height:270px!important;border-radius:24px!important;
+  box-shadow:0 22px 50px rgba(4,21,15,.18)!important;
+}
+.avatar{
+  width:120px!important;height:120px!important;
+  background:linear-gradient(135deg,#e9f8f2,#b9ddce)!important;
+  color:var(--mwf-green)!important;
+}
+.gallery div{
+  height:220px!important;border-radius:22px!important;
+  box-shadow:0 15px 40px rgba(4,21,15,.10)!important;
+}
+.gallery div:first-child{grid-column:span 2;grid-row:span 2;height:456px!important}
+.cta{
+  padding:125px 0!important;
+  background:
+    radial-gradient(circle at 50% 20%,rgba(216,177,90,.16),transparent 25%),
+    linear-gradient(135deg,#043d2d,#087f5b 52%,#064a37)!important;
+}
+.cta h2{font-size:clamp(38px,5vw,58px)!important}
+.form-wrap{gap:40px!important}
+.contact-info,.form{
+  border-radius:28px!important;
+  box-shadow:0 20px 60px rgba(4,21,15,.08)!important;
+}
+input,textarea,select{
+  border-radius:14px!important;
+  padding:15px!important;
+}
+.btn{
+  border-radius:14px!important;
+}
+footer{
+  position:relative;
+  background:
+    radial-gradient(circle at 80% 20%,rgba(8,127,91,.25),transparent 25%),
+    linear-gradient(135deg,#020d09,#09271d)!important;
+}
+.socials a{border-radius:12px!important}
+.reveal{transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)!important}
+@media(max-width:850px){
+  .hero{min-height:690px!important}
+  .stats{margin-top:-55px!important}
+  .gallery div:first-child{grid-column:auto;grid-row:auto;height:180px!important}
+}
+@media(max-width:560px){
+  .hero{min-height:650px!important}
+  .hero h1{font-size:46px!important}
+  .hero p{font-size:16px!important}
+  section{padding:78px 0!important}
+  .stats-grid{border-radius:20px!important}
+  .stat strong{font-size:29px!important}
+  .about-image{min-height:360px!important}
+  .gallery div,.gallery div:first-child{height:155px!important}
+}
+/* elegant scrollbar */
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:#eef5f1}
+::-webkit-scrollbar-thumb{background:linear-gradient(#087f5b,#d8b15a);border-radius:99px}
+</style>
+
 </head>
 <body>
 
@@ -597,12 +807,13 @@ window.addEventListener("load",function(){
             <div class="info-item"><span>📋</span><div><strong>Review</strong><span>Requests should be reviewed by the foundation team.</span></div></div>
           </div>
           <div class="form reveal">
-            <form action="https://formspree.io/f/xgawdvke" method="POST">
+            <form id="applyForm" action="https://formspree.io/f/xgawdvke" method="POST">
               <div class="two"><div><label>Full Name</label><input type="text" name="full_name" required placeholder="Your name"></div><div><label>Mobile Number</label><input type="tel" name="mobile" required placeholder="03XX-XXXXXXX"></div></div>
               <div><label>Address</label><input type="text" name="address" required placeholder="Your address"></div>
               <div><label>Type of Assistance</label><select name="assistance_type" required><option value="">Select</option><option>Education</option><option>Health</option><option>Food / Family Support</option><option>Other</option></select></div>
               <div><label>Reason / Details</label><textarea name="details" required placeholder="Briefly explain your request"></textarea></div>
               <button class="btn" type="submit">Submit Application</button>
+              <div id="applyFormMsg" style="display:none;margin-top:8px;font-weight:700;font-size:14px"></div>
             </form>
           </div>
         </div>
@@ -624,11 +835,12 @@ window.addEventListener("load",function(){
             </div>
           </div>
           <div class="form reveal">
-            <form action="https://formspree.io/f/xgawdvke" method="POST">
+            <form id="contactForm" action="https://formspree.io/f/xgawdvke" method="POST">
               <div class="two"><div><label>Name</label><input type="text" name="name" required placeholder="Your name"></div><div><label>Email</label><input type="email" name="email" required placeholder="you@example.com"></div></div>
               <div><label>Subject</label><input type="text" name="subject" required placeholder="How can we help?"></div>
               <div><label>Message</label><textarea name="message" required placeholder="Write your message..."></textarea></div>
               <button class="btn" type="submit">Send Message</button>
+              <div id="contactFormMsg" style="display:none;margin-top:8px;font-weight:700;font-size:14px"></div>
             </form>
           </div>
         </div>
@@ -979,6 +1191,154 @@ window.addEventListener("load",function(){
   });
 
   setAdminUI(isAdmin());
+})();
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+/* ===== PDF Receipt on Submit ===== */
+(function(){
+  function nowStr(){
+    return new Date().toLocaleString("en-GB",{
+      day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"
+    });
+  }
+
+  function generateReceiptPDF(opts){
+    if(!window.jspdf){ return false; }
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ unit:"pt", format:"a4" });
+    const pageW = doc.internal.pageSize.getWidth();
+    let y = 60;
+
+    doc.setFillColor(8,127,91);
+    doc.rect(0,0,pageW,92,"F");
+    doc.setTextColor(255,255,255);
+    doc.setFont("helvetica","bold");
+    doc.setFontSize(19);
+    doc.text("Mohsin Welfare Foundation", 40, 38);
+    doc.setFont("helvetica","normal");
+    doc.setFontSize(10.5);
+    doc.text("Aloch, Tehsil Puran, District Shangla, Khyber Pakhtunkhwa", 40, 58);
+    doc.text("Phone: 0341-5164034   |   Email: muhammadmohsinmushtaq29@gmail.com", 40, 74);
+
+    y = 128;
+    doc.setTextColor(16,35,29);
+    doc.setFont("helvetica","bold");
+    doc.setFontSize(16);
+    doc.text(opts.title, 40, y);
+    y += 10;
+    doc.setDrawColor(8,127,91);
+    doc.setLineWidth(1.2);
+    doc.line(40, y, pageW-40, y);
+    y += 24;
+
+    doc.setFont("helvetica","normal");
+    doc.setFontSize(10);
+    doc.setTextColor(100,110,105);
+    doc.text("Reference ID: " + opts.refId, 40, y);
+    doc.text("Submitted: " + nowStr(), pageW-40, y, { align:"right" });
+    y += 30;
+
+    doc.setFontSize(11.5);
+    opts.fields.forEach(function(f){
+      doc.setFont("helvetica","bold");
+      doc.setTextColor(16,35,29);
+      doc.text(f.label + ":", 40, y);
+      doc.setFont("helvetica","normal");
+      doc.setTextColor(55,65,60);
+      const lines = doc.splitTextToSize(f.value && String(f.value).trim() ? String(f.value) : "-", pageW-190);
+      doc.text(lines, 190, y);
+      y += Math.max(20, lines.length * 15);
+      if(y > 760){ doc.addPage(); y = 60; }
+    });
+
+    y += 15;
+    doc.setDrawColor(220,230,225);
+    doc.setLineWidth(0.7);
+    doc.line(40, y, pageW-40, y);
+    y += 22;
+    doc.setFontSize(9.5);
+    doc.setTextColor(130,140,135);
+    doc.text("This is an auto-generated confirmation receipt. Please keep it for your records.", 40, y);
+
+    doc.save(opts.filename);
+    return true;
+  }
+
+  function attachForm(formId, msgId, opts){
+    const form = document.getElementById(formId);
+    if(!form) return;
+    const msg = document.getElementById(msgId);
+
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+
+      const fd = new FormData(form);
+      const refId = "MWF-" + Date.now().toString().slice(-8);
+      const fields = opts.fieldMap.map(function(m){
+        return { label:m.label, value:fd.get(m.name) };
+      });
+
+      generateReceiptPDF({
+        title: opts.title,
+        refId: refId,
+        fields: fields,
+        filename: opts.filenamePrefix + "-" + refId + ".pdf"
+      });
+
+      if(msg){
+        msg.style.display = "block";
+        msg.style.color = "#087f5b";
+        msg.textContent = "⏳ Sending...";
+      }
+
+      fetch(form.action, {
+        method: "POST",
+        body: fd,
+        headers: { "Accept": "application/json" }
+      }).then(function(res){
+        if(msg){
+          if(res.ok){
+            msg.style.color = "#087f5b";
+            msg.textContent = "✅ Thank you! Your submission has been sent and a PDF receipt was downloaded.";
+            form.reset();
+          }else{
+            msg.style.color = "#b42318";
+            msg.textContent = "⚠️ Could not send right now, but your PDF receipt was downloaded. Please try again or contact us directly.";
+          }
+        }
+      }).catch(function(){
+        if(msg){
+          msg.style.color = "#b42318";
+          msg.textContent = "⚠️ Could not send right now, but your PDF receipt was downloaded. Please try again or contact us directly.";
+        }
+      });
+    });
+  }
+
+  attachForm("applyForm", "applyFormMsg", {
+    title: "Assistance Request — Confirmation Receipt",
+    filenamePrefix: "MWF-Application-Receipt",
+    fieldMap: [
+      { name:"full_name", label:"Full Name" },
+      { name:"mobile", label:"Mobile Number" },
+      { name:"address", label:"Address" },
+      { name:"assistance_type", label:"Assistance Type" },
+      { name:"details", label:"Reason / Details" }
+    ]
+  });
+
+  attachForm("contactForm", "contactFormMsg", {
+    title: "Contact Message — Confirmation Receipt",
+    filenamePrefix: "MWF-Contact-Receipt",
+    fieldMap: [
+      { name:"name", label:"Name" },
+      { name:"email", label:"Email" },
+      { name:"subject", label:"Subject" },
+      { name:"message", label:"Message" }
+    ]
+  });
 })();
 </script>
 
