@@ -953,6 +953,20 @@ p,li,label,input,textarea,select{
 }
 </style>
 
+
+<style id="mwf-help-applications-css">
+#applicationsOverlay .editor-panel{max-height:90vh;overflow:auto}
+#applicationsTable th,#applicationsTable td{border-bottom:1px solid #e3ebe7;font-size:13px}
+#applicationsTable td{padding:11px 12px;color:#3d4d46}
+#applicationsTable tbody tr:hover{background:#f8fcfa}
+.app-status{display:inline-flex;padding:5px 9px;border-radius:999px;background:#fff4d8;color:#77540b;font-weight:800;font-size:11px}
+.app-empty{padding:28px;text-align:center;color:#6b7b74}
+@media(max-width:700px){
+  #applicationsOverlay .editor-actions{width:100%}
+  #applicationsOverlay .editor-actions .btn{flex:1}
+}
+</style>
+
 </head>
 <body>
 
@@ -1114,6 +1128,9 @@ window.addEventListener("load",function(){
           </div>
           <div class="form reveal">
             <form id="applyForm" action="https://formspree.io/f/xgawdvke" method="POST">
+              <input type="hidden" name="application_no" id="applicationNo">
+              <input type="hidden" name="application_date" id="applicationDate">
+              <input type="hidden" name="status" id="applicationStatus" value="Pending">
               <div class="two"><div><label>Full Name</label><input type="text" name="full_name" required placeholder="Your name"></div><div><label>Mobile Number</label><input type="tel" name="mobile" required placeholder="03XX-XXXXXXX"></div></div>
               <div><label>Address</label><input type="text" name="address" required placeholder="Your address"></div>
               <div><label>Type of Assistance</label><select name="assistance_type" required><option value="">Select</option><option>Education</option><option>Health</option><option>Food / Family Support</option><option>Other</option></select></div>
@@ -1300,8 +1317,42 @@ window.addEventListener("load",function(){
 <div class="admin-status" id="adminStatus">🔐 Admin Mode</div>
 <div class="admin-toolbar" id="adminToolbar">
   <button class="admin-primary" id="adminEditBtn" type="button">✏️ Edit Website</button>
+<button class="admin-primary" id="adminApplicationsBtn" type="button">📄 Help Applications PDF</button>
 <button class="admin-primary" id="adminPasswordBtn" type="button">🔑 Password</button>
   <button class="admin-danger" id="adminLogoutBtn" type="button">🔒 Lock</button>
+</div>
+
+
+<div class="editor-overlay" id="applicationsOverlay" aria-hidden="true">
+  <div class="editor-panel" style="width:min(1180px,100%)">
+    <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap">
+      <div>
+        <h2>📄 Help Applications</h2>
+        <p class="editor-note" style="margin:4px 0 0">All assistance applications stored by the connected backend.</p>
+      </div>
+      <div class="editor-actions" style="margin-top:0">
+        <button class="btn" id="refreshApplicationsBtn" type="button">↻ Refresh</button>
+        <button class="btn" id="downloadApplicationsPdfBtn" type="button">📄 Download Help Applications PDF</button>
+        <button class="btn editor-close" id="closeApplicationsBtn" type="button">Close</button>
+      </div>
+    </div>
+    <div id="applicationsConfigNotice" style="display:none;margin:16px 0;padding:12px 14px;border-radius:12px;background:#fff5e6;color:#7a4b00;border:1px solid #f0d49a;font-size:13px"></div>
+    <div id="applicationsLoading" style="padding:20px 0;color:#64756d">Loading applications…</div>
+    <div style="overflow:auto;border:1px solid #e3ebe7;border-radius:16px">
+      <table id="applicationsTable" style="width:100%;border-collapse:collapse;min-width:900px;background:#fff">
+        <thead><tr style="background:#f0f7f4">
+          <th style="padding:12px;text-align:left">Application No.</th>
+          <th style="padding:12px;text-align:left">Name</th>
+          <th style="padding:12px;text-align:left">Phone</th>
+          <th style="padding:12px;text-align:left">Address</th>
+          <th style="padding:12px;text-align:left">Help Type</th>
+          <th style="padding:12px;text-align:left">Date</th>
+          <th style="padding:12px;text-align:left">Status</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
 <div class="editor-overlay" id="editorOverlay"><div class="editor-panel"><h2>✏️ Website Editor</h2><div id="loggedInAdmin" style="font-size:13px;color:#087f5b;font-weight:800;margin-bottom:6px"></div><p class="editor-note">Coding ki zaroorat nahi. Information edit karein, Save karein, phir Download Updated Website karke GitHub par upload karein.</p><div class="editor-grid">
@@ -1500,6 +1551,207 @@ window.addEventListener("load",function(){
 })();
 </script>
 
+
+<script id="mwf-help-applications-system">
+/*
+  MOHSIN WELFARE FOUNDATION — HELP APPLICATIONS SYSTEM
+  Set BACKEND_URL after deploying backend.gs as a Google Apps Script Web App.
+  Example: https://script.google.com/macros/s/XXXX/exec
+*/
+window.MWF_HELP_BACKEND_URL = window.MWF_HELP_BACKEND_URL || "";
+window.MWF_HELP_BACKEND_KEY = window.MWF_HELP_BACKEND_KEY || "";
+
+(function(){
+  "use strict";
+  const $ = id => document.getElementById(id);
+  let applications = [];
+
+  function esc(v){
+    return String(v ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  function applicationNumber(){
+    const stamp = Date.now().toString().slice(-8);
+    const rand = Math.floor(100 + Math.random()*900);
+    return "MWF-" + stamp + "-" + rand;
+  }
+
+  function localDate(){
+    return new Date().toLocaleString("en-GB",{
+      day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"
+    });
+  }
+
+  function setMetadata(){
+    const no = applicationNumber();
+    const date = localDate();
+    if($("applicationNo")) $("applicationNo").value = no;
+    if($("applicationDate")) $("applicationDate").value = date;
+    if($("applicationStatus")) $("applicationStatus").value = "Pending";
+    return {no,date};
+  }
+
+  function render(){
+    const tbody = document.querySelector("#applicationsTable tbody");
+    const loading = $("applicationsLoading");
+    if(!tbody) return;
+    loading.style.display = "none";
+    tbody.innerHTML = "";
+    if(!applications.length){
+      tbody.innerHTML = '<tr><td colspan="7" class="app-empty">No help applications found.</td></tr>';
+      return;
+    }
+    applications.forEach(a=>{
+      const tr = document.createElement("tr");
+      tr.innerHTML =
+        "<td>"+esc(a.application_no)+"</td>"+
+        "<td>"+esc(a.full_name)+"</td>"+
+        "<td>"+esc(a.mobile)+"</td>"+
+        "<td>"+esc(a.address)+"</td>"+
+        "<td>"+esc(a.assistance_type)+"</td>"+
+        "<td>"+esc(a.date || a.application_date)+"</td>"+
+        '<td><span class="app-status">'+esc(a.status || "Pending")+"</span></td>";
+      tbody.appendChild(tr);
+    });
+  }
+
+  function showNotice(msg){
+    const n = $("applicationsConfigNotice");
+    if(n){ n.style.display="block"; n.textContent=msg; }
+  }
+
+  function hideNotice(){
+    const n = $("applicationsConfigNotice");
+    if(n) n.style.display="none";
+  }
+
+  function loadApplications(){
+    if(!window.MWF_HELP_BACKEND_URL){
+      applications = JSON.parse(localStorage.getItem("mwf-help-applications") || "[]");
+      showNotice("Backend is not configured yet. This browser-only fallback is NOT shared between different visitors. Deploy backend.gs and set MWF_HELP_BACKEND_URL to create one shared application list.");
+      render();
+      return;
+    }
+    hideNotice();
+    $("applicationsLoading").style.display="block";
+    $("applicationsLoading").textContent="Loading applications…";
+
+    const cb = "mwfHelpCb_" + Date.now();
+    const script = document.createElement("script");
+    const cleanup = () => { try{delete window[cb]}catch(e){} script.remove(); };
+    window[cb] = function(data){
+      cleanup();
+      if(data && data.ok){
+        applications = Array.isArray(data.applications) ? data.applications : [];
+        render();
+      }else{
+        $("applicationsLoading").textContent = "Could not load applications.";
+      }
+    };
+    const key = encodeURIComponent(window.MWF_HELP_BACKEND_KEY || "");
+    script.src = window.MWF_HELP_BACKEND_URL + "?action=list&key=" + key + "&callback=" + cb;
+    script.onerror = function(){ cleanup(); $("applicationsLoading").textContent="Backend connection failed."; };
+    document.body.appendChild(script);
+  }
+
+  function saveToBackend(record){
+    if(!window.MWF_HELP_BACKEND_URL) return;
+    const body = new URLSearchParams();
+    body.set("action","submit");
+    body.set("key",window.MWF_HELP_BACKEND_KEY || "");
+    Object.keys(record).forEach(k=>body.set(k, record[k] ?? ""));
+    fetch(window.MWF_HELP_BACKEND_URL,{
+      method:"POST",
+      mode:"no-cors",
+      body:body
+    }).catch(()=>{});
+  }
+
+  function generateApplicationsPDF(){
+    if(!window.jspdf){ alert("PDF library is not loaded. Please check your internet connection."); return; }
+    const {jsPDF} = window.jspdf;
+    const doc = new jsPDF({unit:"pt",format:"a4"});
+    const pageW = doc.internal.pageSize.getWidth();
+    const margin = 28;
+    const cols = [
+      ["Application No.",88],["Name",90],["Phone",72],["Address",105],
+      ["Help Type",72],["Date",72],["Status",55]
+    ];
+    let y = 52;
+
+    function header(){
+      doc.setFillColor(8,127,91); doc.rect(0,0,pageW,74,"F");
+      doc.setTextColor(255,255,255); doc.setFont("helvetica","bold"); doc.setFontSize(16);
+      doc.text("Mohsin Welfare Foundation",margin,28);
+      doc.setFont("helvetica","normal"); doc.setFontSize(9);
+      doc.text("Help Applications List",margin,46);
+      doc.text("Generated: "+new Date().toLocaleString("en-GB"),pageW-margin,46,{align:"right"});
+      y=94;
+      let x=margin;
+      doc.setFillColor(240,247,244); doc.rect(margin,y-14,pageW-margin*2,22,"F");
+      doc.setTextColor(16,35,29); doc.setFont("helvetica","bold"); doc.setFontSize(7.5);
+      cols.forEach(c=>{doc.text(c[0],x,y);x+=c[1]});
+      y+=18;
+    }
+    function row(a, idx){
+      const vals=[a.application_no,a.full_name,a.mobile,a.address,a.assistance_type,a.date||a.application_date,a.status||"Pending"];
+      let x=margin, maxLines=1;
+      doc.setFont("helvetica","normal"); doc.setFontSize(7);
+      vals.forEach((v,i)=>{
+        const lines=doc.splitTextToSize(String(v||"-"),cols[i][1]-5);
+        doc.setTextColor(55,65,60); doc.text(lines,x,y);
+        maxLines=Math.max(maxLines,lines.length); x+=cols[i][1];
+      });
+      y += Math.max(20,maxLines*9)+5;
+      doc.setDrawColor(225,235,231); doc.line(margin,y-5,pageW-margin,y-5);
+    }
+
+    header();
+    if(!applications.length){
+      doc.setFontSize(11); doc.setTextColor(100,110,105);
+      doc.text("No help applications found.",margin,y+20);
+    }else{
+      applications.forEach((a,i)=>{
+        if(y>760){doc.addPage();header();}
+        row(a,i);
+      });
+    }
+    doc.save("MWF-Help-Applications-"+new Date().toISOString().slice(0,10)+".pdf");
+  }
+
+  const form = $("applyForm");
+  if(form){
+    form.addEventListener("submit", function(){
+      const meta = setMetadata();
+      const fd = new FormData(form);
+      const record = {
+        application_no: meta.no,
+        full_name: fd.get("full_name"),
+        mobile: fd.get("mobile"),
+        address: fd.get("address"),
+        assistance_type: fd.get("assistance_type"),
+        details: fd.get("details"),
+        application_date: meta.date,
+        date: meta.date,
+        status: "Pending"
+      };
+      const old = JSON.parse(localStorage.getItem("mwf-help-applications") || "[]");
+      old.unshift(record);
+      localStorage.setItem("mwf-help-applications", JSON.stringify(old.slice(0,500)));
+      saveToBackend(record);
+    }, true);
+  }
+
+  const openBtn=$("adminApplicationsBtn"), closeBtn=$("closeApplicationsBtn"), refresh=$("refreshApplicationsBtn"), pdf=$("downloadApplicationsPdfBtn");
+  if(openBtn) openBtn.addEventListener("click",()=>{ $("applicationsOverlay").classList.add("open"); $("applicationsOverlay").setAttribute("aria-hidden","false"); document.body.style.overflow="hidden"; loadApplications(); });
+  if(closeBtn) closeBtn.addEventListener("click",()=>{ $("applicationsOverlay").classList.remove("open"); $("applicationsOverlay").setAttribute("aria-hidden","true"); document.body.style.overflow=""; });
+  if(refresh) refresh.addEventListener("click",loadApplications);
+  if(pdf) pdf.addEventListener("click",generateApplicationsPDF);
+
+  window.MWF_HELP = {loadApplications,generateApplicationsPDF};
+})();
+</script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
 /* ===== PDF Receipt on Submit ===== */
@@ -1627,10 +1879,13 @@ window.addEventListener("load",function(){
     title: "Assistance Request — Confirmation Receipt",
     filenamePrefix: "MWF-Application-Receipt",
     fieldMap: [
+      { name:"application_no", label:"Application No." },
       { name:"full_name", label:"Full Name" },
       { name:"mobile", label:"Mobile Number" },
       { name:"address", label:"Address" },
       { name:"assistance_type", label:"Assistance Type" },
+      { name:"application_date", label:"Date" },
+      { name:"status", label:"Status" },
       { name:"details", label:"Reason / Details" }
     ]
   });
@@ -1733,6 +1988,15 @@ document.addEventListener("DOMContentLoaded",()=>{
     });
     btn.addEventListener("mouseleave",()=>btn.style.transform="");
   });
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  if(window.MWF_HELP_BACKEND_URL && !window.MWF_HELP_BACKEND_KEY){
+    console.warn("MWF help backend URL is configured without a backend key.");
+  }
 });
 </script>
 
